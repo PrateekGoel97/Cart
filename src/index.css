@@ -30,3 +30,29 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.cart-icon {
+   height:32px;
+   margin-right: 20px;
+}
+
+.navbar{
+  height: 70px;
+  background-color: #4267b2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.carticoncontainer{
+  position: relative;
+}
+
+.cartcount{
+  background: yellow;
+  border-radius: 50%;
+  padding: 4px 8px;
+  position: absolute;
+  right:0;
+  top:-9px;
+}
