@@ -91,7 +91,7 @@ getCartTotal = () => {
     cartTotal = cartTotal + product.qty * product.price
   })
 
-  return cartTotal;
+  return '';
 }
 
   render(){
