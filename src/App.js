@@ -75,10 +75,23 @@ handleIncrease = (product) =>{                           // getting product as a
     const {products}= this.state;                        // getting products array with help of state
     const index =  products.indexOf(product);            // getting index of product from products array
 
-    products[index].qty += 1;                            // increasing quantity
+    // products[index].qty += 1;                            // increasing quantity
 
-    this.setState({
-        products:products                                // setting state of products array to updated products array
+    // this.setState({
+    //     products:products                                // setting state of products array to updated products array
+    // })
+
+    const docRef = this.db.collection('products').doc(products[index].id);
+
+    docRef
+    .update({
+        qty: products[index].qty+1
+    })
+    .then(()=>{
+        console.log('documeent updated successfully')
+    })
+    .catch((error) =>{
+      console.log(error);
     })
 }
 
@@ -90,11 +103,24 @@ handleDecrease =( product) =>{
     if(products[index].qty === 0){                         // checking if products are zero then dont set it to negative
         return; 
     }
-    products[index].qty -= 1;
+    // products[index].qty -= 1;
 
-    this.setState({
-        products:products,
-        loading:false
+    // this.setState({
+    //     products:products,
+    //     loading:false
+    // })
+
+    const docRef = this.db.collection('products').doc(products[index].id);
+
+    docRef
+    .update({
+      qty: products[index].qty-1
+    })
+    .then(()=>{
+      console.log('decresed successfully')
+    })
+    .catch((error) =>{
+      console.log(error);
     })
 
 }
@@ -104,9 +130,21 @@ handleDelete = (id) =>{
     const {products} = this.state;
     const items = products.filter((item)=> item.id !== id);          // filter the array whose id doesnt match
 
-    this.setState({
-        products:items
+    // this.setState({
+    //     products:items
+    // })
+
+    const docRef = this.db.collection('products').doc(id);
+
+    docRef
+    .delete()
+    .then(()=>{
+      console.log('Deleted successfully')
     })
+    .catch((error) =>{
+      console.log(error);
+    })
+
 }
 
 getcount= () =>{
