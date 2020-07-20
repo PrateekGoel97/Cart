@@ -11,6 +11,7 @@ class App extends React.Component {
         products:[],
         loading:true
   } 
+  this.db = firebase.firestore();
 }
 
 componentDidMount(){
@@ -131,11 +132,31 @@ getCartTotal = () => {
   return cartTotal;
 }
 
+addProduct = () => {
+
+     this.db
+     .collection('products')
+     .add({
+        img:'',
+        price:900,
+        qty:5,
+        title:"Washing Machine"
+     })
+     .then((docRef)=>{
+         console.log('Product added',docRef);
+     })
+     .catch((error)=> {
+       console.log(error);
+     })
+}
+
+
   render(){
        const {products,loading} = this.state;
       return (
         <div className="App">
           <NavBar  count={this.getcount()}  />
+          <button onClick={this.addProduct}> Add a Product</button>
           <Cart 
               products={products}
               increaseQuantity={this.handleIncrease}           // sending handleincrease as a refrence in props
